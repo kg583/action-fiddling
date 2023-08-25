@@ -19,7 +19,7 @@ jobs:
           to: "json"
       - name: Save to environment variables
         env:
-          8X: '${{ steps.xml-to-json.outputs.output }}'
+          8X: $'\'${{ steps.xml-to-json.outputs.output }}\''
         run: echo '$8X' > out/8X.json
       - name: Save results
         uses: actions/upload-artifact@v3
