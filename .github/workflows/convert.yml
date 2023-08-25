@@ -18,4 +18,4 @@ jobs:
           from: "xml"
           to: "json"
       - name: Save results
-        run: echo "${{ steps.xml-to-json.outputs.output }}" > ~/8X.json
+        run: echo "${{ steps.xml-to-json.outputs.output }}" > "~/8X.json"
