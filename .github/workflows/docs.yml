@@ -19,7 +19,7 @@ jobs:
       - name: Build site
         run: |
           pip install mkdocs
-          mkdocs gh-pages
+          mkdocs gh-deploy
 
   deploy:
     needs: build
