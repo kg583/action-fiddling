@@ -1,4 +1,12 @@
 site_name: tivars_lib_py
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - json
+    - python
+    - xml
+
 plugins:
 - mkdocstrings:
     handlers:
