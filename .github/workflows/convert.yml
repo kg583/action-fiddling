@@ -1,0 +1,21 @@
+name: Convert token sheets to JSON
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  converter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sheets
+        uses: actions/checkout@v3
+      - name: Run converter for 8X.xml
+        uses: fabasoad/data-format-converter-action@main
+        id: xml-to-json
+        with:
+          input: "8X.xml"
+          from: "xml"
+          to: "json"
+      - name: Save results
+        run: echo "${{ steps.xml-to-json.outputs.output }}" > ~/8X.json
