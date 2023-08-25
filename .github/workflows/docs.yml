@@ -17,11 +17,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: Build site
-        run: mkdocs build -o docs/
-      - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: docs/
+        run: |
+          pip install mkdocs
+          mkdocs gh-pages
 
   deploy:
     needs: build
