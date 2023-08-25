@@ -4,3 +4,5 @@ plugins:
     handlers:
       python:
         paths: [.]
+        options:
+          docstring_style: sphinx
