@@ -1,3 +1,5 @@
+site_name: tivars_lib_py
+docs_dir: ../docs
 plugins:
 - mkdocstrings:
     handlers:
