@@ -17,10 +17,10 @@ jobs:
           input: "8X.xml"
           from: "xml"
           to: "json"
-      - run: |
-          mkdir out/
-          echo '${{ steps.xml-to-json.outputs.output }}' > out/8X.json
+      - run: echo '${{ steps.xml-to-json.outputs.output }}' > 8X.json
       - name: Save results
-        uses: actions/upload-artifact@v3
+        uses: test-room-7/action-update-file@v1
         with:
-         path: out/
+            file-path: 8X.json
+            commit-msg: Generate JSON files
+            github-token: ${{ secrets.GITHUB_TOKEN }}
