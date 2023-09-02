@@ -31,6 +31,7 @@ jobs:
             --html-output=./docs \
             --project-base-dir="$(pwd)" \
             --docformat=restructuredtext \
+            --intersphinx=https://docs.python.org/3/objects.inv \
             ./tivars
 
     - name: Upload pages artifact
