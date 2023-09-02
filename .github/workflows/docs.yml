@@ -22,8 +22,6 @@ jobs:
 
     - name: Generate API documentation with pydoctor
       run: |
-
-        # Run pydoctor build
         pydoctor \
             --project-name=tivars_lib_py \
             --project-url=https://github.com/$GITHUB_REPOSITORY \
@@ -33,6 +31,11 @@ jobs:
             --html-output=./docs \
             --project-base-dir="$(pwd)" \
             ./tivars
+
+    - name: Upload pages artifact
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: docs/
 
   deploy:
     needs: build
