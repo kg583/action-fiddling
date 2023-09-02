@@ -7,24 +7,33 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout lib with submodules
-        uses: actions/checkout@v3
-        with:
-          submodules: recursive
-      - name: Install Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-      - name: Build site
-        run: |
-          pip install mkdocs
-          pip install mkdocstrings-python
-          mkdocs build
-      - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: site/
+    - uses: actions/checkout@master
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11
+
+    - name: Install requirements for documentation generation
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        python -m pip install docutils pydoctor
+
+    - name: Generate API documentation with pydoctor
+      run: |
+
+        # Run pydoctor build
+        pydoctor \
+            --project-name=tivars_lib_py \
+            --project-url=https://github.com/$GITHUB_REPOSITORY \
+            --html-viewsource-base=https://github.com/$GITHUB_REPOSITORY/tree/$GITHUB_SHA \
+            --theme readthedocs \
+            --make-html \
+            --html-output=./docs \
+            --project-base-dir="$(pwd)" \
+            --docformat=google \
+            ./
 
   deploy:
     needs: build
