@@ -127,10 +127,10 @@ class Boolean(Converter):
     @classmethod
     def set(cls, value: _T, **kwargs) -> bytes:
         """
-        Converts `bool` -> `bytes`, where ``b'\x80'`` is truthy and ``b'\x00'`` is falsy
+        Converts `bool` -> `bytes`, where ``b'\\x80'`` is truthy and ``b'\\x00'`` is falsy
 
         :param value: The value to convert
-        :return: ``b'\x80'` if ``value`` is truthy else ``b'\x00'``
+        :return: ``b'\\x80'`` if ``value`` is truthy else ``b'\\x00'``
         """
 
         return b'\x80' if value else b'\x00'
