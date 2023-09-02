@@ -56,7 +56,7 @@ class Bytes(Converter):
         Converts `bytes` -> `bytes` (no-op)
 
         :param data: The raw bytes to convert
-        :return: The bytes in `data`, unchanged
+        :return: The bytes in ``data``, unchanged
         """
 
         return bytes(data)
@@ -67,7 +67,7 @@ class Bytes(Converter):
         Converts `bytes` -> `bytes` (no-op)
 
         :param value: The value to convert
-        :return: The bytes in `value`, unchanged
+        :return: The bytes in ``value``, unchanged
         """
 
         return bytes(value)
@@ -88,7 +88,7 @@ class Data(Bytes):
 
         :param value: The value to convert
         :param instance: The instance which contains the data section
-        :return: The bytes in `value`, unchanged
+        :return: The bytes in ``value``, unchanged
         """
 
         instance.version = instance.get_version(value)
@@ -119,7 +119,7 @@ class Boolean(Converter):
         Converts `bytes` -> `bool`, where any nonzero value is truthy
 
         :param data: The raw bytes to convert
-        :return: Whether `data` is nonzero
+        :return: Whether ``data`` is nonzero
         """
 
         return data != b'\x00'
@@ -127,10 +127,10 @@ class Boolean(Converter):
     @classmethod
     def set(cls, value: _T, **kwargs) -> bytes:
         """
-        Converts `bool` -> `bytes`, where `b'\x80'` is truthy and `b'\x00'` is falsy
+        Converts `bool` -> `bytes`, where ``b'\x80'`` is truthy and ``b'\x00'`` is falsy
 
         :param value: The value to convert
-        :return: `b'\x80'` if `value` is truthy else `b'\x00'`
+        :return: ``b'\x80'` if ``value`` is truthy else ``b'\x00'``
         """
 
         return b'\x80' if value else b'\x00'
@@ -151,7 +151,7 @@ class Integer(Converter):
         Converts `bytes` -> `int`
 
         :param data: The raw bytes to convert
-        :return: The little-endian integer given by `data`
+        :return: The little-endian integer given by ``data``
         """
 
         return int.from_bytes(data, 'little')
@@ -165,7 +165,7 @@ class Integer(Converter):
 
         :param value: The value to convert
         :param length: The length of the data section
-        :return: The little-endian representation of `value`
+        :return: The little-endian representation of ``value``
         """
 
         return int.to_bytes(value, length if length is not None else 2, 'little')
@@ -186,7 +186,7 @@ class String(Converter):
         Converts `bytes` -> `str`
 
         :param data: The raw bytes to convert
-        :return: The utf-8 decoding of `data` with trailing null bytes removed
+        :return: The utf-8 decoding of ``data`` with trailing null bytes removed
         """
 
         return data.decode('utf8').rstrip('\0')
@@ -197,7 +197,7 @@ class String(Converter):
         Converts `str` -> `bytes`
 
         :param value: The value to convert
-        :return: The utf-8 encoding of `value`
+        :return: The utf-8 encoding of ``value``
         """
 
         return value.encode('utf8')
@@ -207,7 +207,7 @@ class Bits:
     """
     Sliceable converter to extract and package a slice of bits within a byte
 
-    Use like `Bits[start:end:step]` to view a slice of a byte.
+    Use like ``Bits[start:end:step]`` to view a slice of a byte.
     """
 
     def __class_getitem__(cls, item: slice = slice(None)):
@@ -230,7 +230,7 @@ class Bits:
                 Converts `bytes` -> `int` by concatenating bits in a slice
 
                 :param data: The raw bytes to convert
-                :return: The sliced bits in `data` joined without gaps as an integer
+                :return: The sliced bits in ``data`` joined without gaps as an integer
                 """
 
                 value = ""
@@ -247,7 +247,7 @@ class Bits:
 
                 :param value: The value to convert
                 :param current: The current value of the data section
-                :return: The bytes in `value` fit into the section
+                :return: The bytes in ``value`` fit into the section
                 """
 
                 data = 0
@@ -272,9 +272,9 @@ class Section:
     A data section is given by its length and type converter.
     Their primary function is to permit the user to read and write data sections as their natural data types.
 
-    The sections are stored in the `raw` attribute of their class, which is an instance of a `Raw` container.
+    The sections are stored in the ``raw`` attribute of their class, which is an instance of a ``Raw`` container.
     A priori, a data section does not correspond to any one part of a var file.
-    Individual sections are instead stitched together to yield a var file's contents via `raw.bytes()`.
+    Individual sections are instead stitched together to yield a var file's contents via ``raw.bytes()``.
 
     Distinct data sections are entirely independent, which is useful for sections which may vary in length.
     To construct sections which point to a portion of another section, see the `View` class.
@@ -355,7 +355,7 @@ class Section:
     @property
     def name(self) -> str:
         """
-        :return: The `Raw` class attribute name that this section stores to
+        :return: The ``Raw`` class attribute name that this section stores to
         """
 
         return self._name
