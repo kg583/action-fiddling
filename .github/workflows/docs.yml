@@ -33,7 +33,7 @@ jobs:
             --html-output=./docs \
             --project-base-dir="$(pwd)" \
             --docformat=google \
-            ./
+            ./tivars
 
   deploy:
     needs: build
