@@ -83,8 +83,8 @@ class Data(Bytes):
 
         Certain metadata fields are updated automatically based on the entry's data.
         The following are set by this converter:
-            - Version
-            - Length (for sized data)
+        | - Version
+        | - Length (for sized data)
 
         :param value: The value to convert
         :param instance: The instance which contains the data section
