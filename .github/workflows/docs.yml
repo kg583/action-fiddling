@@ -20,10 +20,6 @@ jobs:
         python -m pip install --upgrade pip setuptools wheel
         python -m pip install docutils pydoctor
 
-    - name: Monkey patch (WIP)
-      run: |
-        ls -a
-
     - name: Generate API documentation with pydoctor
       run: |
         pydoctor \
@@ -37,6 +33,11 @@ jobs:
             --docformat=restructuredtext \
             --intersphinx=https://docs.python.org/3/objects.inv \
             ./tivars
+    
+    - name: Monkey patch (WIP)
+      run: |
+        cd ./docs
+        cat nameIndex.html
 
     - name: Upload pages artifact
       uses: actions/upload-pages-artifact@v1
