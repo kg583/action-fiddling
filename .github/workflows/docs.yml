@@ -37,7 +37,7 @@ jobs:
     - name: Monkey patch the name index
       run: |
         cd ./docs
-        sed -i -r "s:<li>(.*?) 0 .*?#\1%200.*?</li>::g" nameIndex.html
+        sed -i -r "s:<li>.*?(.*?) 0 -.*<code data-type=.*#\1%200. class=.internal-link.>.*\1 0.*</code>.*?</li>::g" nameIndex.html
 
     - name: Upload pages artifact
       uses: actions/upload-pages-artifact@v1
