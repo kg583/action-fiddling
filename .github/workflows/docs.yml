@@ -20,6 +20,10 @@ jobs:
         python -m pip install --upgrade pip setuptools wheel
         python -m pip install docutils pydoctor
 
+    - name: Monkey patch (WIP)
+      run: |
+        ls -a
+
     - name: Generate API documentation with pydoctor
       run: |
         pydoctor \
