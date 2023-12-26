@@ -14,7 +14,7 @@ jobs:
       - name: Run converter for 8X.xml
         run: |
           import json
-          from .formats import *
+          from formats import *
           with open("8X.xml", encoding="UTF-8") as infile:
             with open("8X.json", encoding="UTF-8") as outfile:
               json.dump(to_json(ET.fromstring(file.read())), outfile, indent=2)
