@@ -10,15 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sheets
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Run converter for 8X.xml
-        uses: fabasoad/data-format-converter-action@main
-        id: xml-to-json
-        with:
-          input: "8X.xml"
-          from: "xml"
-          to: "json"
-      - run: echo '${{ steps.xml-to-json.outputs.output }}' > 8X.json
+        run: |
+          import json
+          with open("8X.xml", encoding="UTF-8") as infile:
+            with open("8X.json", encoding="UTF-8") as outfile:
+              json.dump(to_json(ET.fromstring(file.read())), outfile, indent=2)
       - name: Save results
         uses: test-room-7/action-update-file@v1
         with:
