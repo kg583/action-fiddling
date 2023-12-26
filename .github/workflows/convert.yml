@@ -13,6 +13,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Run converter for 8X.xml
         run: |
+          import os
+          import sys
+          module_path = os.path.abspath(os.getcwd() + "/scripts")
+          if module_path not in sys.path:
+            sys.path.append(module_path)
+
           import json
           from scripts.formats import *
           with open("8X.xml", encoding="UTF-8") as infile:
