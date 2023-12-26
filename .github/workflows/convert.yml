@@ -17,6 +17,7 @@ jobs:
           with open("8X.xml", encoding="UTF-8") as infile:
             with open("8X.json", encoding="UTF-8") as outfile:
               json.dump(to_json(ET.fromstring(file.read())), outfile, indent=2)
+        shell: python
       - name: Save results
         uses: test-room-7/action-update-file@v1
         with:
