@@ -23,8 +23,8 @@ jobs:
           import xml.etree.ElementTree as ET
           from scripts.formats import *
           with open("8X.xml", encoding="UTF-8") as infile:
-            with open("8X.json", "w+", encoding="UTF-16") as outfile:
-              json.dump(to_json(ET.fromstring(infile.read())), outfile, indent=2)
+            with open("8X.json", "w+", encoding="UTF-8") as outfile:
+              json.dump(to_json(ET.fromstring(infile.read())), outfile, indent=2, ensure_ascii=False)
         shell: python
       - name: Save results
         uses: test-room-7/action-update-file@v1
