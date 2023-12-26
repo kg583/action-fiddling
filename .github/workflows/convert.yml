@@ -19,7 +19,7 @@ jobs:
           if module_path not in sys.path:
             sys.path.append(module_path)
 
-          print(*os.walk(os.getcwd()))
+          print(os.getcwd())
 
           import json
           from formats import *
