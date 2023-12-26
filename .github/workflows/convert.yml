@@ -26,9 +26,10 @@ jobs:
             with open("8X.json", "w+", encoding="UTF-8") as outfile:
               json.dump(to_json(ET.fromstring(infile.read())), outfile, indent=2, ensure_ascii=False)
         shell: python
-      - name: Save results
-        uses: test-room-7/action-update-file@v1
+      - name: Save to built branch
+        uses: s0/git-publish-subdir-action@develop
         with:
-            file-path: 8X.json
-            commit-msg: Generate JSON files
-            github-token: ${{ secrets.GITHUB_TOKEN }}
+          REPO: self
+          BRANCH: built
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MESSAGE: "Build: ({sha}) {msg}"
