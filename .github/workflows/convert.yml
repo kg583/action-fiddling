@@ -20,6 +20,7 @@ jobs:
             sys.path.append(module_path)
 
           import json
+          import xml.etree.ElementTree as ET
           from scripts.formats import *
           with open("8X.xml", encoding="UTF-8") as infile:
             with open("8X.json", encoding="UTF-8") as outfile:
