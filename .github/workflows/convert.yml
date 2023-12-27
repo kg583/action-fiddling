@@ -18,7 +18,7 @@ jobs:
         run: |
           mkdir built
           cd scripts/
-          python build.py
+          python -m build
 
       - name: Save to built branch
         uses: s0/git-publish-subdir-action@develop
