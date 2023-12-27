@@ -14,7 +14,9 @@ jobs:
       - name: Run converter for 8X.xml
         run: |
           import os
+          impot shutil
           import sys
+          
           module_path = os.path.abspath(os.getcwd())
           if module_path not in sys.path:
             sys.path.append(module_path)
@@ -24,6 +26,8 @@ jobs:
           from scripts.formats import *
 
           os.mkdir("built")
+          shutil.copyfile("8X.xml", "built/8X.xml")
+          
           with open("8X.xml", encoding="UTF-8") as infile:
             with open("built/8X.json", "w+", encoding="UTF-8") as outfile:
               json.dump(to_json(ET.fromstring(infile.read())), outfile, indent=2, ensure_ascii=False)
