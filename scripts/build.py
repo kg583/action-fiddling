@@ -1,7 +1,7 @@
 import json
 import xml.etree.ElementTree as ET
 
-from ..scripts import *
+from .formats import *
 
 
 with open("../8X.xml", encoding="UTF-8") as infile:
