@@ -1,17 +1,19 @@
-name: Convert token sheets to JSON
-
 on:
   push:
-    branches: [ "main" ]
-
+    branches: [ 'main' ]
+  pull_request:
+    branches: [ 'main' ]
+    
 jobs:
-  converter:
-    permissions: write-all
+  build:
+    name: Build and validate token sheets
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sheets
         uses: actions/checkout@v4
-      - name: Run converter for 8X.xml
+        
+      - name: Prepare build env
+        shell: python
         run: |
           import os
           import sys
@@ -19,23 +21,26 @@ jobs:
           module_path = os.path.abspath(os.getcwd())
           if module_path not in sys.path:
             sys.path.append(module_path)
+          
+          os.mkdir("built")
 
+      - name: Run build script
+        shell: python
+        run: |
           import json
           import xml.etree.ElementTree as ET
           from scripts.formats import *
-
-          os.mkdir("built")
+          
           with open("8X.xml", encoding="UTF-8") as infile:
             root = ET.fromstring(src := infile.read())
-
+          
             with open("built/8X.xml", "w+", encoding="UTF-8") as outfile:
               validate(root)
               outfile.write(src)
           
             with open("built/8X.json", "w+", encoding="UTF-8") as outfile:
               json.dump(to_json(root), outfile, indent=2, ensure_ascii=False)
-              
-        shell: python
+
       - name: Save to built branch
         uses: s0/git-publish-subdir-action@develop
         env:
