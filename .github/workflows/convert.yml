@@ -6,12 +6,13 @@ on:
     
 jobs:
   build:
+    permissions: write-all
     name: Build and validate token sheets
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sheets
         uses: actions/checkout@v4
-        
+
       - name: Prepare build env
         run: mkdir built
 
